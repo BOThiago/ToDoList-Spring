@@ -96,8 +96,8 @@ public class UserService {
     public ResponseEntity<ResponseDTO<Void>> deleteUser(Long id) {
         try {
             userRepository.deleteById(id);
-            ResponseDTO<Void> response = new ResponseDTO<>("User deleted", 200, true, null);
-            return new ResponseEntity<>(response, HttpStatus.OK);
+            ResponseDTO<Void> response = new ResponseDTO<>("User deleted", 204, true, null);
+            return new ResponseEntity<>(response, HttpStatus.NO_CONTENT);
         } catch (Exception e) {
             ResponseDTO<Void> response = new ResponseDTO<>(e.getMessage(), 500, false, null);
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
