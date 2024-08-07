@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.ToDoList.domain.user.User;
 import com.example.ToDoList.dto.response.ResponseDTO;
+import com.example.ToDoList.dto.response.TaskResponseDTO;
 import com.example.ToDoList.dto.response.UserResponseDTO;
+import com.example.ToDoList.service.TaskService;
 import com.example.ToDoList.service.UserService;
 
 @RestController
@@ -23,6 +25,9 @@ public class UserController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    TaskService taskService;
 
     @GetMapping("/users")
     public ResponseEntity<ResponseDTO<List<UserResponseDTO>>> getAllUsers() {
@@ -47,5 +52,10 @@ public class UserController {
     @DeleteMapping("/users/{id}")
     public ResponseEntity<ResponseDTO<Void>> deleteUser(@PathVariable Long id) {
         return userService.deleteUser(id);
+    }
+
+    @GetMapping("/users/{userId}/tasks")
+    public ResponseEntity<ResponseDTO<List<TaskResponseDTO>>> getTasksByUserId(@PathVariable Long userId) {
+        return taskService.getTasksByUserId(userId);
     }
 }
